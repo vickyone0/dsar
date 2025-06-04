@@ -1,11 +1,25 @@
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Node {
     pub value: i32,
     pub next: Option<Box<Node>>,
 }
 
 impl Node{
+
+    pub fn new(value: i32) -> Box<Self>{
+        Box::new(Node {
+            value,
+            next: None,
+        })
+    }
+
+    pub fn with_next(value: i32, next: Option<Box<Node>>) -> Self {
+        Node {
+            value,
+            next,
+        }
+    }
 
     pub fn value(v:i32) -> Node {
         Node {
@@ -24,13 +38,14 @@ impl Node{
     pub fn print_value(&self) {
 
         let mut temp = self;
-        while temp.next.is_some() {
-            println!("Value: {}", self.value);
-            // if let Some(next_node) = &self.next {
-            //     self.value = next_node.value;
-            // }
-            temp = temp.next.as_ref().unwrap();
-        }
+        // while temp.value {
+        //     println!("Value: {}", temp.value);
+        //     // if let Some(next_node) = &self.next {
+        //     //     self.value = next_node.value;
+        //     // }
+        //     temp = temp.next.as_ref().unwrap();
+        // }
+        println!("Value: {}", temp.value);
     }
 
 }
