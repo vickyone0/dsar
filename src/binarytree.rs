@@ -22,3 +22,33 @@ impl<T: Ord> Node<T> {
 pub struct BinaryTree<T: Ord> {
     root: Option<Box<Node<T>>>,
 }
+
+//insertion
+
+impl<T: Ord> BinaryTree<T> {
+    pub fn new() -> Self {
+        BinaryTree { root: None }
+    }
+
+
+    fn insert_recursive(node: &mut Box<Node<T>>, value: T) {
+
+        match value.cmp(&node.value) {
+            Ordering::Less => {
+                if let Some(left) = &mut node.left {
+                    Self::insert_recursive(left, value);
+                } else {
+                    node.left = Some(Box::new(Node::new(value)));
+                }
+            }
+            Ordering::Greater => {
+                if let Some(right) = &mut node.right {
+                    Self::insert_recursive(right, value);
+                } else {
+                    node.right = Some(Box::new(Node::new(value)));
+                }
+            }
+            Ordering::Equal => (),
+        }
+    }
+}
