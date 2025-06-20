@@ -23,11 +23,22 @@ pub struct BinaryTree<T: Ord> {
     root: Option<Box<Node<T>>>,
 }
 
-//insertion
+//insertion 
 
-impl<T: Ord> BinaryTree<T> {
+impl<T: Ord + std::fmt::Debug> BinaryTree<T> {
     pub fn new() -> Self {
         BinaryTree { root: None }
+    }
+
+    pub fn insert(&mut self, value: T) {
+        match self.root {
+            Some(ref mut node) => {
+                Self::insert_recursive(node, value);
+            }
+            None => {
+                self.root = Some(Box::new(Node::new(value)));
+            }
+        }
     }
 
 
@@ -50,5 +61,16 @@ impl<T: Ord> BinaryTree<T> {
             }
             Ordering::Equal => (),
         }
+    }
+
+    pub fn inorder_traversal(&self) {
+        fn traverse<T: Ord + std::fmt::Debug>(node: &Option<Box<Node<T>>>) {
+            if let Some(n) = node {
+                traverse(&n.left);
+                println!("{:?}", n.value);
+                traverse(&n.right);
+    }
+}
+        traverse(&self.root);
     }
 }
