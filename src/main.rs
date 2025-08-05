@@ -69,6 +69,8 @@ use reqwest;
 use tokio;
 mod bubblesort;
 use crate::bubblesort::bubble_sort;
+mod selectionsort;
+use crate::selectionsort::selection_sort;
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
@@ -80,7 +82,9 @@ async fn main() -> Result<(), reqwest::Error>{
     let mut arr= [5,4,3,32,5];
 
 
-    let sorted_array = bubble_sort(& mut arr);
+    //let sorted_array = bubble_sort(& mut arr);
+
+    let sorted_array = selection_sort(& mut arr);
 
 
     println!("{:?}",sorted_array);
