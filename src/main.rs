@@ -67,11 +67,25 @@
 
 use reqwest;
 use tokio;
+mod bubblesort;
+use crate::bubblesort::bubble_sort;
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
-    let url = "https://api.github.com/users/rust-lang";
-    let response = reqwest::get(url).await?.json::<serde_json::Value>().await?;
-    println!("GitHub user: {:?}", response["login"]);
+    // let url = "https://api.github.com/users/rust-lang";
+    // let response = reqwest::get(url).await?.json::<serde_json::Value>().await?;
+    // println!("GitHub user: {:?}", response["login"]);
+    
+
+    let mut arr= [5,4,3,32,5];
+
+
+    let sorted_array = bubble_sort(& mut arr);
+
+
+    println!("{:?}",sorted_array);
+
+
+
     Ok(())
 }
