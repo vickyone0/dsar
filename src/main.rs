@@ -71,6 +71,9 @@ mod bubblesort;
 use crate::bubblesort::bubble_sort;
 mod selectionsort;
 use crate::selectionsort::selection_sort;
+mod twosumsorted;
+use crate::twosumsorted::two_sum_sorted;
+
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
@@ -79,15 +82,17 @@ async fn main() -> Result<(), reqwest::Error>{
     // println!("GitHub user: {:?}", response["login"]);
     
 
-    let mut arr= [5,4,3,32,5];
-
+    let  arr= [5,7,10,32,34];
+     
+    let target = 15;
 
     //let sorted_array = bubble_sort(& mut arr);
 
-    let sorted_array = selection_sort(& mut arr);
+
+    let output = two_sum_sorted(&arr, target);
 
 
-    println!("{:?}",sorted_array);
+    println!("{:?}",output);
 
 
 
