@@ -73,6 +73,8 @@ mod selectionsort;
 use crate::selectionsort::selection_sort;
 mod twosumsorted;
 use crate::twosumsorted::two_sum_sorted;
+mod maxvoliume;
+use crate::maxvoliume::max_volume;
 
 
 #[tokio::main]
@@ -82,7 +84,9 @@ async fn main() -> Result<(), reqwest::Error>{
     // println!("GitHub user: {:?}", response["login"]);
     
 
-    let  arr= [5,7,10,32,34];
+    let  arr= [5,50,10,32,34];
+
+    println!("max volume is {}", max_volume(&arr));
      
     let target = 15;
 
