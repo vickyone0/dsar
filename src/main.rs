@@ -75,6 +75,8 @@ mod twosumsorted;
 use crate::twosumsorted::two_sum_sorted;
 mod maxvoliume;
 use crate::maxvoliume::max_volume;
+mod sildingwindow;
+use crate::sildingwindow::max_sum_subarray;
 
 
 #[tokio::main]
@@ -86,8 +88,10 @@ async fn main() -> Result<(), reqwest::Error>{
 
     let  arr= [5,50,10,32,34];
 
-    println!("max volume is {}", max_volume(&arr));
-     
+    let len = 3;
+
+    //println!("max volume is {}", max_volume(&arr));
+     println!("max sub array of length {} is {:?}",len, max_sum_subarray(&arr, len));
     let target = 15;
 
     //let sorted_array = bubble_sort(& mut arr);
