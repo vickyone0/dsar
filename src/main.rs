@@ -77,6 +77,8 @@ mod maxvoliume;
 use crate::maxvoliume::max_volume;
 mod sildingwindow;
 use crate::sildingwindow::max_sum_subarray;
+mod recursion;
+use crate::recursion::recursion;
 
 
 #[tokio::main]
@@ -85,6 +87,8 @@ async fn main() -> Result<(), reqwest::Error>{
     // let response = reqwest::get(url).await?.json::<serde_json::Value>().await?;
     // println!("GitHub user: {:?}", response["login"]);
     
+
+    recursion(5);
 
     let  arr= [5,50,10,32,34];
 
