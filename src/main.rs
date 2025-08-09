@@ -88,7 +88,7 @@ async fn main() -> Result<(), reqwest::Error>{
     // println!("GitHub user: {:?}", response["login"]);
     
 
-    recursion(5);
+    println!("{}",recursion(2));
 
     let  arr= [5,50,10,32,34];
 
