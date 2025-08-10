@@ -12,3 +12,23 @@ pub fn recursion(num:i32) -> i32{
 
 
 }
+
+pub fn recursion_power_logn(a:i32, n:i32) -> i32{
+    
+    if n == 0{
+        return a;
+    }
+
+    if n % 2 == 0 {
+        let half = recursion_power_logn(a,n/2);
+         return half * half;
+    }
+    else{
+        let my_ans = recursion_power_logn(a, n-1);
+        return my_ans;
+    }
+
+    return a;
+
+}
+

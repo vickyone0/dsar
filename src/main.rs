@@ -78,7 +78,7 @@ use crate::maxvoliume::max_volume;
 mod sildingwindow;
 use crate::sildingwindow::max_sum_subarray;
 mod recursion;
-use crate::recursion::recursion;
+use crate::recursion::{recursion,recursion_power_logn};
 
 
 #[tokio::main]
@@ -89,6 +89,8 @@ async fn main() -> Result<(), reqwest::Error>{
     
 
     println!("{}",recursion(2));
+
+     println!("{}",recursion_power_logn(5,2));
 
     let  arr= [5,50,10,32,34];
 
