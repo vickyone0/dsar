@@ -79,6 +79,8 @@ mod sildingwindow;
 use crate::sildingwindow::max_sum_subarray;
 mod recursion;
 use crate::recursion::{recursion,recursion_power_logn};
+mod backtracking;
+use crate::backtracking::n_queen;
 
 
 #[tokio::main]
@@ -87,6 +89,17 @@ async fn main() -> Result<(), reqwest::Error>{
     // let response = reqwest::get(url).await?.json::<serde_json::Value>().await?;
     // println!("GitHub user: {:?}", response["login"]);
     
+   
+    let n = 7;
+    let solutions = n_queen(n);
+
+    println!("Total solutions for {}-Queens: {}", n, solutions.len());
+    for sol in solutions {
+        for row in sol {
+            println!("{}", row);
+        }
+        println!();
+    }
 
     println!("{}",recursion(2));
 

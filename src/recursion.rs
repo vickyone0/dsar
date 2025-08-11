@@ -16,7 +16,7 @@ pub fn recursion(num:i32) -> i32{
 pub fn recursion_power_logn(a:i32, n:i32) -> i32{
     
     if n == 0{
-        return a;
+        return 1;
     }
 
     if n % 2 == 0 {
