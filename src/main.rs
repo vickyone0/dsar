@@ -105,7 +105,7 @@ async fn main() -> Result<(), reqwest::Error>{
 
      println!("{}",recursion_power_logn(5,2));
 
-    let  arr= [5,50,10,32,34];
+    let mut  arr= [5,50,10,32,34];
 
     let len = 3;
 
@@ -113,7 +113,7 @@ async fn main() -> Result<(), reqwest::Error>{
      println!("max sub array of length {} is {:?}",len, max_sum_subarray(&arr, len));
     let target = 15;
 
-    //let sorted_array = bubble_sort(& mut arr);
+    //let sorted_array = selection_sort(& mut arr);
 
 
     let output = two_sum_sorted(&arr, target);
