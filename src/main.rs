@@ -81,6 +81,8 @@ mod recursion;
 use crate::recursion::{recursion,recursion_power_logn};
 mod backtracking;
 use crate::backtracking::n_queen;
+mod binarysearch;
+use crate::binarysearch::binary_search;
 
 
 #[tokio::main]
@@ -106,6 +108,8 @@ async fn main() -> Result<(), reqwest::Error>{
      println!("{}",recursion_power_logn(5,2));
 
     let mut  arr= [5,50,10,32,34];
+
+    println!("binary search : {:?}", binary_search(&arr, 10));
 
     let len = 3;
 
