@@ -85,6 +85,8 @@ mod binarysearch;
 use crate::binarysearch::{binary_search, rsa_min_value};
 mod mergesort;
 use crate::mergesort::merge_sort;
+mod quicksort;
+use crate::quicksort::quick_sort;
 
 
 #[tokio::main]
@@ -116,6 +118,8 @@ async fn main() -> Result<(), reqwest::Error>{
     println!("binary search : {:?}", rsa_min_value(&arr));
       
     println!("merge sort : {:?}", merge_sort(arr1));
+    
+    println!("quick sort : {:?}", quick_sort(&mut arr));
   
     let len = 3;
 
