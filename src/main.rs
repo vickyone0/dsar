@@ -82,7 +82,9 @@ use crate::recursion::{recursion,recursion_power_logn};
 mod backtracking;
 use crate::backtracking::n_queen;
 mod binarysearch;
-use crate::binarysearch::binary_search;
+use crate::binarysearch::{binary_search, rsa_min_value};
+mod mergesort;
+use crate::mergesort::merge_sort;
 
 
 #[tokio::main]
@@ -109,8 +111,12 @@ async fn main() -> Result<(), reqwest::Error>{
 
     let mut  arr= [5,50,10,32,34];
 
-    println!("binary search : {:?}", binary_search(&arr, 10));
+    let arr1 = vec![38,83,7,7,3,8];
 
+    println!("binary search : {:?}", rsa_min_value(&arr));
+      
+    println!("merge sort : {:?}", merge_sort(arr1));
+  
     let len = 3;
 
     //println!("max volume is {}", max_volume(&arr));
