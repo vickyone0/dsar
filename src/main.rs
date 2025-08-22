@@ -118,8 +118,8 @@ async fn main() -> Result<(), reqwest::Error>{
     println!("binary search : {:?}", rsa_min_value(&arr));
       
     println!("merge sort : {:?}", merge_sort(arr1));
-    
-    println!("quick sort : {:?}", quick_sort(&mut arr));
+    quick_sort(&mut arr);
+    println!("quick sort : {:?}",arr);
   
     let len = 3;
 
