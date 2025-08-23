@@ -87,6 +87,10 @@ mod mergesort;
 use crate::mergesort::merge_sort;
 mod quicksort;
 use crate::quicksort::quick_sort;
+mod insertionsort;
+use crate::insertionsort::insertion_sort;
+mod linkedlist;
+use crate::linkedlist::{Node,reverse_linked_list};
 
 
 #[tokio::main]
@@ -120,6 +124,11 @@ async fn main() -> Result<(), reqwest::Error>{
     println!("merge sort : {:?}", merge_sort(arr1));
     quick_sort(&mut arr);
     println!("quick sort : {:?}",arr);
+    insertion_sort(&mut arr);
+     
+    println!("insertion sort : {:?}",arr);
+    
+
   
     let len = 3;
 
@@ -137,5 +146,17 @@ async fn main() -> Result<(), reqwest::Error>{
 
 
 
+    
+
+    let mut head = Some(Node::new(1));
+    head.as_mut().unwrap().next = Some(Node::new(2));
+    head.as_mut().unwrap().next.as_mut().unwrap().next = Some(Node::new(3));
+
+    println!("Original: {:?}", head);
+    let reversed = reverse_linked_list(head);
+    println!("Reversed: {:?}", reversed);
+    
     Ok(())
+
+    
 }

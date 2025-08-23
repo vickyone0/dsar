@@ -49,3 +49,17 @@ impl Node{
     }
 
 }
+
+
+pub fn reverse_linked_list(mut head: Option<Box<Node>>) -> Option<Box<Node>>
+{
+
+    let mut prev = None;
+    while let Some(mut node) = head {
+        head = node.next.take();
+        node.next = prev;
+        prev = Some(node);
+
+    }
+    prev
+}
