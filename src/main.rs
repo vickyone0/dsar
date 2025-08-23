@@ -90,7 +90,7 @@ use crate::quicksort::quick_sort;
 mod insertionsort;
 use crate::insertionsort::insertion_sort;
 mod linkedlist;
-use crate::linkedlist::{Node,reverse_linked_list};
+use crate::linkedlist::{Node,reverse_linked_list,find_middle};
 
 
 #[tokio::main]
@@ -153,9 +153,13 @@ async fn main() -> Result<(), reqwest::Error>{
     head.as_mut().unwrap().next.as_mut().unwrap().next = Some(Node::new(3));
 
     println!("Original: {:?}", head);
-    let reversed = reverse_linked_list(head);
-    println!("Reversed: {:?}", reversed);
+    ///let reversed = reverse_linked_list(head);
+   // println!("Reversed: {:?}", reversed);
     
+    if let Some(middle) = find_middle(&head){
+        println!("middle node: {}",middle.value);
+
+    }
     Ok(())
 
     

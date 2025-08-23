@@ -63,3 +63,17 @@ pub fn reverse_linked_list(mut head: Option<Box<Node>>) -> Option<Box<Node>>
     }
     prev
 }
+
+
+pub fn find_middle(head: &Option<Box<Node>>) -> Option<&Box<Node>> {
+
+    let mut slow = head.as_ref();
+    let mut fast = head.as_ref();
+
+    while let (Some(f), Some(ff)) = (fast, fast.as_ref().unwrap().next.as_ref()) {
+        fast = ff.next.as_ref();
+        slow = slow.unwrap().next.as_ref();
+    }
+
+    slow
+}
