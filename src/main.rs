@@ -65,6 +65,7 @@
 // }
     
 
+
 use reqwest;
 use tokio;
 mod bubblesort;
@@ -94,7 +95,7 @@ use crate::linkedlist::{Node,reverse_linked_list,find_middle};
 mod stack;
 use crate::stack::stacked;
 mod binarytree;
-use crate::binarytree::{size,TreeNode};
+use crate::binarytree::{size,TreeNode, find_min_max};
 
 
 #[tokio::main]
@@ -111,6 +112,10 @@ async fn main() -> Result<(), reqwest::Error>{
 
 
     println!("Tree size: {}", size(&root));
+
+    if let Some((min_val, max_val)) = find_min_max(&root) {
+        println!("Min: {}, Max: {}", min_val, max_val);
+    }
 
     // stacked();
     // let n = 7;

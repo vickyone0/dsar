@@ -109,3 +109,26 @@ pub fn size(root: &Option<Box<TreeNode>>) -> usize {
         None => 0,
     }
 }
+
+pub fn find_min_max(root: &Option<Box<TreeNode>>) -> Option<(i32, i32)>{
+
+    match root {
+        Some(node) => {
+            let mut min_val = node.val;
+            let mut max_val = node.val;
+
+            if let Some((lmin, lmax)) = find_min_max(&node.left) {
+                min_val = min_val.min(lmin);
+                max_val = max_val.max(lmax);
+            }
+            if let Some((rmin, rmax)) = find_min_max(&node.right) {
+                min_val = min_val.min(rmin);
+                max_val = max_val.max(rmax);
+            }
+
+            Some((min_val, max_val))
+        }
+        None => None,
+    }
+
+}
