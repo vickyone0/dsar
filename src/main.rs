@@ -96,6 +96,8 @@ mod stack;
 use crate::stack::stacked;
 mod binarytree;
 use crate::binarytree::{size, find_min_max, find_path};
+mod hashmap;
+use crate::hashmap::has_zero_sum_subarray;
 
 
 #[tokio::main]
@@ -103,6 +105,15 @@ async fn main() -> Result<(), reqwest::Error>{
     // let url = "https://api.github.com/users/rust-lang";
     // let response = reqwest::get(url).await?.json::<serde_json::Value>().await?;
     // println!("GitHub user: {:?}", response["login"]);
+
+    let arr = [4, 2, -3, 1, 6];
+    println!("Has zero-sum subarray? {}", has_zero_sum_subarray(&arr));
+
+    let arr2 = [1, 2, 3];
+    println!("Has zero-sum subarray? {}", has_zero_sum_subarray(&arr2));
+
+
+
     let mut root: Option<Box<TreeNode>> = None;
 
     insert_bst(&mut root, 10);
