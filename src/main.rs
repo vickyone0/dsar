@@ -91,6 +91,10 @@ mod insertionsort;
 use crate::insertionsort::insertion_sort;
 mod linkedlist;
 use crate::linkedlist::{Node,reverse_linked_list,find_middle};
+mod stack;
+use crate::stack::stacked;
+mod binarytree;
+use crate::binarytree::{size,TreeNode};
 
 
 #[tokio::main]
@@ -99,50 +103,59 @@ async fn main() -> Result<(), reqwest::Error>{
     // let response = reqwest::get(url).await?.json::<serde_json::Value>().await?;
     // println!("GitHub user: {:?}", response["login"]);
     
-   
-    let n = 7;
-    let solutions = n_queen(n);
 
-    println!("Total solutions for {}-Queens: {}", n, solutions.len());
-    for sol in solutions {
-        for row in sol {
-            println!("{}", row);
-        }
-        println!();
-    }
+    let mut root = Some(Box::new(TreeNode::new(1)));
+    root.as_mut().unwrap().left = Some(Box::new(TreeNode::new(2)));
+    root.as_mut().unwrap().right = Some(Box::new(TreeNode::new(3)));
+    root.as_mut().unwrap().left.as_mut().unwrap().left = Some(Box::new(TreeNode::new(4)));
 
-    println!("{}",recursion(2));
 
-     println!("{}",recursion_power_logn(5,2));
+    println!("Tree size: {}", size(&root));
 
-    let mut  arr= [5,50,10,32,34];
+    // stacked();
+    // let n = 7;
+    // let solutions = n_queen(n);
 
-    let arr1 = vec![38,83,7,7,3,8];
+    // println!("Total solutions for {}-Queens: {}", n, solutions.len());
+    // for sol in solutions {
+    //     for row in sol {
+    //         println!("{}", row);
+    //     }
+    //     println!();
+    // }
 
-    println!("binary search : {:?}", rsa_min_value(&arr));
+    // println!("{}",recursion(2));
+
+    //  println!("{}",recursion_power_logn(5,2));
+
+    // let mut  arr= [5,50,10,32,34];
+
+    // let arr1 = vec![38,83,7,7,3,8];
+
+    // println!("binary search : {:?}", rsa_min_value(&arr));
       
-    println!("merge sort : {:?}", merge_sort(arr1));
-    quick_sort(&mut arr);
-    println!("quick sort : {:?}",arr);
-    insertion_sort(&mut arr);
+    // println!("merge sort : {:?}", merge_sort(arr1));
+    // quick_sort(&mut arr);
+    // println!("quick sort : {:?}",arr);
+    // insertion_sort(&mut arr);
      
-    println!("insertion sort : {:?}",arr);
+    // println!("insertion sort : {:?}",arr);
     
 
   
-    let len = 3;
+    // let len = 3;
 
-    //println!("max volume is {}", max_volume(&arr));
-     println!("max sub array of length {} is {:?}",len, max_sum_subarray(&arr, len));
-    let target = 15;
+    // //println!("max volume is {}", max_volume(&arr));
+    //  println!("max sub array of length {} is {:?}",len, max_sum_subarray(&arr, len));
+    // let target = 15;
 
-    //let sorted_array = selection_sort(& mut arr);
-
-
-    let output = two_sum_sorted(&arr, target);
+    // //let sorted_array = selection_sort(& mut arr);
 
 
-    println!("{:?}",output);
+    // let output = two_sum_sorted(&arr, target);
+
+
+    // println!("{:?}",output);
 
 
 

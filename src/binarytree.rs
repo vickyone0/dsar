@@ -89,3 +89,23 @@
 //     }
     
 // }
+
+#[derive(Debug)]
+pub struct TreeNode {
+    pub val: i32,
+   pub  left: Option<Box<TreeNode>>,
+   pub right: Option<Box<TreeNode>>,
+}
+
+impl TreeNode {
+   pub fn new(val: i32) -> Self {
+        TreeNode { val, left: None, right: None }
+    }
+}
+
+pub fn size(root: &Option<Box<TreeNode>>) -> usize {
+    match root {
+        Some(node) => 1 + size(&node.left)+ size(&node.right),
+        None => 0,
+    }
+}
