@@ -97,7 +97,7 @@ use crate::stack::stacked;
 mod binarytree;
 use crate::binarytree::{size, find_min_max, find_path};
 mod hashmap;
-use crate::hashmap::{has_zero_sum_subarray, count_zero_sum_subarrays,longest_zero_sum_subarray};
+use crate::hashmap::{has_zero_sum_subarray, count_zero_sum_subarrays,longest_zero_sum_subarray, longest_consecutive};
 
 
 #[tokio::main]
@@ -114,6 +114,11 @@ async fn main() -> Result<(), reqwest::Error>{
      println!(
         "Length of longest zero-sum subarray: {}",
         longest_zero_sum_subarray(&arr)
+    );
+
+    println!(
+        "Longest consecutive sequence length: {}",
+        longest_consecutive(&arr)
     );
 
 

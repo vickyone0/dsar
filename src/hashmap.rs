@@ -65,3 +65,54 @@ pub fn longest_zero_sum_subarray(arr: &[i32]) -> usize {
     }
     max_len
 }
+
+pub fn longest_consecutive(nums: &[i32]) -> usize {
+    let mut map: HashMap<i32, bool> = HashMap::new();
+
+    // Fill map with numbers, marked as not visited
+    for &num in nums {
+        map.insert(num, false);
+    }
+
+    let mut longest = 0;
+
+    for &num in nums {
+        // Only start from numbers that have not been visited
+        if let Some(visited) = map.get_mut(&num) {
+            if *visited {
+                continue; // Skip if already part of a counted sequence
+            }
+
+            *visited = true;
+
+            // Expand in both directions
+            let mut length = 1;
+            let mut left = num - 1;
+            let mut right = num + 1;
+
+            // Expand left
+            while let Some(v) = map.get_mut(&left) {
+                if *v {
+                    break;
+                }
+                *v = true;
+                length += 1;
+                left -= 1;
+            }
+
+            // Expand right
+            while let Some(v) = map.get_mut(&right) {
+                if *v {
+                    break;
+                }
+                *v = true;
+                length += 1;
+                right += 1;
+            }
+
+            longest = longest.max(length);
+        }
+    }
+
+    longest
+}
