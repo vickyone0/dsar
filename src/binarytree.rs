@@ -132,3 +132,23 @@ pub fn find_min_max(root: &Option<Box<TreeNode>>) -> Option<(i32, i32)>{
     }
 
 }
+
+pub fn find_path(root: &Option<Box<TreeNode>>, target:i32, path: &mut Vec<i32>) -> bool{
+
+    if let Some(node) = root {
+
+        path.push(node.val);
+
+        if node.val == target {
+            return true;
+        }
+
+        if find_path(&node.left, target, path) || find_path(&node.right, target, path){
+            return true;
+        }
+
+        path.pop();
+    }
+
+    false
+}

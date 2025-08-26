@@ -83,7 +83,7 @@ use crate::recursion::{recursion,recursion_power_logn};
 mod backtracking;
 use crate::backtracking::n_queen;
 mod binarysearch;
-use crate::binarysearch::{binary_search, rsa_min_value};
+use crate::binarysearch::{binary_search, rsa_min_value,insert_bst,TreeNode};
 mod mergesort;
 use crate::mergesort::merge_sort;
 mod quicksort;
@@ -95,7 +95,7 @@ use crate::linkedlist::{Node,reverse_linked_list,find_middle};
 mod stack;
 use crate::stack::stacked;
 mod binarytree;
-use crate::binarytree::{size,TreeNode, find_min_max};
+use crate::binarytree::{size, find_min_max, find_path};
 
 
 #[tokio::main]
@@ -103,19 +103,39 @@ async fn main() -> Result<(), reqwest::Error>{
     // let url = "https://api.github.com/users/rust-lang";
     // let response = reqwest::get(url).await?.json::<serde_json::Value>().await?;
     // println!("GitHub user: {:?}", response["login"]);
+    let mut root: Option<Box<TreeNode>> = None;
+
+    insert_bst(&mut root, 10);
+    insert_bst(&mut root, 5);
+    insert_bst(&mut root, 15);
+    insert_bst(&mut root, 3);
+    insert_bst(&mut root, 7);
+
+    println!("{:#?}", root);
+
+    let val = 6;
+    insert_bst(&mut root, val);
+     println!("{:#?}", root);
+
+    // let mut root = Some(Box::new(TreeNode::new(1)));
+    // root.as_mut().unwrap().left = Some(Box::new(TreeNode::new(2)));
+    // root.as_mut().unwrap().right = Some(Box::new(TreeNode::new(3)));
+    // root.as_mut().unwrap().left.as_mut().unwrap().left = Some(Box::new(TreeNode::new(4)));
+
+
+    // println!("Tree size: {}", size(&root));
+
+    // if let Some((min_val, max_val)) = find_min_max(&root) {
+    //     println!("Min: {}, Max: {}", min_val, max_val);
+    // }
     
-
-    let mut root = Some(Box::new(TreeNode::new(1)));
-    root.as_mut().unwrap().left = Some(Box::new(TreeNode::new(2)));
-    root.as_mut().unwrap().right = Some(Box::new(TreeNode::new(3)));
-    root.as_mut().unwrap().left.as_mut().unwrap().left = Some(Box::new(TreeNode::new(4)));
-
-
-    println!("Tree size: {}", size(&root));
-
-    if let Some((min_val, max_val)) = find_min_max(&root) {
-        println!("Min: {}, Max: {}", min_val, max_val);
-    }
+    // let target = 4;
+    // let mut path= Vec::new();
+    // // if find_path(&root, target, &mut path) {
+    //     println!("Path to {}: {:?}", target, path); // Path to 7: [10, 5, 7]
+    // } else {
+    //     println!("Node {} not found.", target);
+    // }
 
     // stacked();
     // let n = 7;

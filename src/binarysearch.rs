@@ -39,3 +39,36 @@ pub fn rsa_min_value(arr: &[i32]) -> i32{
     arr[left]
 
 }
+
+#[derive(Debug)]
+pub struct TreeNode {
+
+    pub val: i32,
+    pub left: Option<Box<TreeNode>>,
+    pub right: Option<Box<TreeNode>>,
+ 
+}
+
+impl TreeNode {
+    pub fn new(val: i32) -> Self {
+        TreeNode{
+            val, left: None, right: None
+        }
+    }
+}
+
+pub fn insert_bst(root: &mut Option<Box<TreeNode>>, val: i32) {
+    match root {
+        Some(node) => {
+            if val < node.val {
+                insert_bst(&mut node.left, val);
+            } else if val > node.val {
+                insert_bst(&mut node.right, val);
+            }
+            // Do nothing if val == node.val (no duplicates)
+        }
+        None => {
+            *root = Some(Box::new(TreeNode::new(val)));
+        }
+    }
+}
