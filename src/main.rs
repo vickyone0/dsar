@@ -97,7 +97,7 @@ use crate::stack::stacked;
 mod binarytree;
 use crate::binarytree::{size, find_min_max, find_path};
 mod hashmap;
-use crate::hashmap::has_zero_sum_subarray;
+use crate::hashmap::{has_zero_sum_subarray, count_zero_sum_subarrays,longest_zero_sum_subarray};
 
 
 #[tokio::main]
@@ -108,10 +108,13 @@ async fn main() -> Result<(), reqwest::Error>{
 
     let arr = [4, 2, -3, 1, 6];
     println!("Has zero-sum subarray? {}", has_zero_sum_subarray(&arr));
-
+    println!("Count of zero-sum subarrays: {}", count_zero_sum_subarrays(&arr));
     let arr2 = [1, 2, 3];
     println!("Has zero-sum subarray? {}", has_zero_sum_subarray(&arr2));
-
+     println!(
+        "Length of longest zero-sum subarray: {}",
+        longest_zero_sum_subarray(&arr)
+    );
 
 
     let mut root: Option<Box<TreeNode>> = None;
