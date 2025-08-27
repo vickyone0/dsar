@@ -98,6 +98,8 @@ mod binarytree;
 use crate::binarytree::{size, find_min_max, find_path};
 mod hashmap;
 use crate::hashmap::{has_zero_sum_subarray, count_zero_sum_subarrays,longest_zero_sum_subarray, longest_consecutive};
+mod graph;
+use crate::graph::{num_of_island};
 
 
 #[tokio::main]
@@ -106,117 +108,125 @@ async fn main() -> Result<(), reqwest::Error>{
     // let response = reqwest::get(url).await?.json::<serde_json::Value>().await?;
     // println!("GitHub user: {:?}", response["login"]);
 
-    let arr = [4, 2, -3, 1, 6];
-    println!("Has zero-sum subarray? {}", has_zero_sum_subarray(&arr));
-    println!("Count of zero-sum subarrays: {}", count_zero_sum_subarrays(&arr));
-    let arr2 = [1, 2, 3];
-    println!("Has zero-sum subarray? {}", has_zero_sum_subarray(&arr2));
-     println!(
-        "Length of longest zero-sum subarray: {}",
-        longest_zero_sum_subarray(&arr)
-    );
+    let grid = vec![
+        vec!['1','1','0','0','0'],
+        vec!['1','1','0','0','0'],
+        vec!['0','0','1','0','0'],
+        vec!['0','0','0','1','1'],
+    ];
+    println!("Number of islands: {}", num_of_island(grid));
 
-    println!(
-        "Longest consecutive sequence length: {}",
-        longest_consecutive(&arr)
-    );
+//     let arr = [4, 2, -3, 1, 6];
+//     println!("Has zero-sum subarray? {}", has_zero_sum_subarray(&arr));
+//     println!("Count of zero-sum subarrays: {}", count_zero_sum_subarrays(&arr));
+//     let arr2 = [1, 2, 3];
+//     println!("Has zero-sum subarray? {}", has_zero_sum_subarray(&arr2));
+//      println!(
+//         "Length of longest zero-sum subarray: {}",
+//         longest_zero_sum_subarray(&arr)
+//     );
 
-
-    let mut root: Option<Box<TreeNode>> = None;
-
-    insert_bst(&mut root, 10);
-    insert_bst(&mut root, 5);
-    insert_bst(&mut root, 15);
-    insert_bst(&mut root, 3);
-    insert_bst(&mut root, 7);
-
-    println!("{:#?}", root);
-
-    let val = 6;
-    insert_bst(&mut root, val);
-     println!("{:#?}", root);
-
-    // let mut root = Some(Box::new(TreeNode::new(1)));
-    // root.as_mut().unwrap().left = Some(Box::new(TreeNode::new(2)));
-    // root.as_mut().unwrap().right = Some(Box::new(TreeNode::new(3)));
-    // root.as_mut().unwrap().left.as_mut().unwrap().left = Some(Box::new(TreeNode::new(4)));
+//     println!(
+//         "Longest consecutive sequence length: {}",
+//         longest_consecutive(&arr)
+//     );
 
 
-    // println!("Tree size: {}", size(&root));
+//     let mut root: Option<Box<TreeNode>> = None;
 
-    // if let Some((min_val, max_val)) = find_min_max(&root) {
-    //     println!("Min: {}, Max: {}", min_val, max_val);
-    // }
+//     insert_bst(&mut root, 10);
+//     insert_bst(&mut root, 5);
+//     insert_bst(&mut root, 15);
+//     insert_bst(&mut root, 3);
+//     insert_bst(&mut root, 7);
+
+//     println!("{:#?}", root);
+
+//     let val = 6;
+//     insert_bst(&mut root, val);
+//      println!("{:#?}", root);
+
+//     // let mut root = Some(Box::new(TreeNode::new(1)));
+//     // root.as_mut().unwrap().left = Some(Box::new(TreeNode::new(2)));
+//     // root.as_mut().unwrap().right = Some(Box::new(TreeNode::new(3)));
+//     // root.as_mut().unwrap().left.as_mut().unwrap().left = Some(Box::new(TreeNode::new(4)));
+
+
+//     // println!("Tree size: {}", size(&root));
+
+//     // if let Some((min_val, max_val)) = find_min_max(&root) {
+//     //     println!("Min: {}, Max: {}", min_val, max_val);
+//     // }
     
-    // let target = 4;
-    // let mut path= Vec::new();
-    // // if find_path(&root, target, &mut path) {
-    //     println!("Path to {}: {:?}", target, path); // Path to 7: [10, 5, 7]
-    // } else {
-    //     println!("Node {} not found.", target);
-    // }
+//     // let target = 4;
+//     // let mut path= Vec::new();
+//     // // if find_path(&root, target, &mut path) {
+//     //     println!("Path to {}: {:?}", target, path); // Path to 7: [10, 5, 7]
+//     // } else {
+//     //     println!("Node {} not found.", target);
+//     // }
 
-    // stacked();
-    // let n = 7;
-    // let solutions = n_queen(n);
+//     // stacked();
+//     // let n = 7;
+//     // let solutions = n_queen(n);
 
-    // println!("Total solutions for {}-Queens: {}", n, solutions.len());
-    // for sol in solutions {
-    //     for row in sol {
-    //         println!("{}", row);
-    //     }
-    //     println!();
-    // }
+//     // println!("Total solutions for {}-Queens: {}", n, solutions.len());
+//     // for sol in solutions {
+//     //     for row in sol {
+//     //         println!("{}", row);
+//     //     }
+//     //     println!();
+//     // }
 
-    // println!("{}",recursion(2));
+//     // println!("{}",recursion(2));
 
-    //  println!("{}",recursion_power_logn(5,2));
+//     //  println!("{}",recursion_power_logn(5,2));
 
-    // let mut  arr= [5,50,10,32,34];
+//     // let mut  arr= [5,50,10,32,34];
 
-    // let arr1 = vec![38,83,7,7,3,8];
+//     // let arr1 = vec![38,83,7,7,3,8];
 
-    // println!("binary search : {:?}", rsa_min_value(&arr));
+//     // println!("binary search : {:?}", rsa_min_value(&arr));
       
-    // println!("merge sort : {:?}", merge_sort(arr1));
-    // quick_sort(&mut arr);
-    // println!("quick sort : {:?}",arr);
-    // insertion_sort(&mut arr);
+//     // println!("merge sort : {:?}", merge_sort(arr1));
+//     // quick_sort(&mut arr);
+//     // println!("quick sort : {:?}",arr);
+//     // insertion_sort(&mut arr);
      
-    // println!("insertion sort : {:?}",arr);
+//     // println!("insertion sort : {:?}",arr);
     
 
   
-    // let len = 3;
+//     // let len = 3;
 
-    // //println!("max volume is {}", max_volume(&arr));
-    //  println!("max sub array of length {} is {:?}",len, max_sum_subarray(&arr, len));
-    // let target = 15;
+//     // //println!("max volume is {}", max_volume(&arr));
+//     //  println!("max sub array of length {} is {:?}",len, max_sum_subarray(&arr, len));
+//     // let target = 15;
 
-    // //let sorted_array = selection_sort(& mut arr);
-
-
-    // let output = two_sum_sorted(&arr, target);
+//     // //let sorted_array = selection_sort(& mut arr);
 
 
-    // println!("{:?}",output);
+//     // let output = two_sum_sorted(&arr, target);
+
+
+//     // println!("{:?}",output);
 
 
 
     
 
-    let mut head = Some(Node::new(1));
-    head.as_mut().unwrap().next = Some(Node::new(2));
-    head.as_mut().unwrap().next.as_mut().unwrap().next = Some(Node::new(3));
+//     let mut head = Some(Node::new(1));
+//     head.as_mut().unwrap().next = Some(Node::new(2));
+//     head.as_mut().unwrap().next.as_mut().unwrap().next = Some(Node::new(3));
 
-    println!("Original: {:?}", head);
-    ///let reversed = reverse_linked_list(head);
-   // println!("Reversed: {:?}", reversed);
+//     println!("Original: {:?}", head);
+//     ///let reversed = reverse_linked_list(head);
+//    // println!("Reversed: {:?}", reversed);
     
-    if let Some(middle) = find_middle(&head){
-        println!("middle node: {}",middle.value);
+//     if let Some(middle) = find_middle(&head){
+//         println!("middle node: {}",middle.value);
 
-    }
+//     }
     Ok(())
 
     
