@@ -99,7 +99,7 @@ use crate::binarytree::{size, find_min_max, find_path};
 mod hashmap;
 use crate::hashmap::{has_zero_sum_subarray, count_zero_sum_subarrays,longest_zero_sum_subarray, longest_consecutive};
 mod graph;
-use crate::graph::{num_of_island};
+use crate::graph::{num_of_island,oranges_rotting};
 
 
 #[tokio::main]
@@ -107,6 +107,13 @@ async fn main() -> Result<(), reqwest::Error>{
     // let url = "https://api.github.com/users/rust-lang";
     // let response = reqwest::get(url).await?.json::<serde_json::Value>().await?;
     // println!("GitHub user: {:?}", response["login"]);
+    let grid = vec![
+        vec![2, 1, 1],
+        vec![1, 1, 0],
+        vec![0, 1, 1],
+    ];
+    println!("Minutes to rot all: {}", oranges_rotting(grid)); 
+
 
     let grid = vec![
         vec!['1','1','0','0','0'],
