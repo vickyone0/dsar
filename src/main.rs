@@ -191,8 +191,8 @@ async fn main() -> Result<(), reqwest::Error>{
 
 //     //  println!("{}",recursion_power_logn(5,2));
 
-     let   arr= [5,50,-55,32,34];
-     println!("has zero sum of 3 : {}",has_zero_subarray(&arr));
+     let   arr= [1, -1, 2, -2, 3, -3, 1];
+     println!("count of subarray of zero: {}",count_zero_sum_subarrays(&arr));
 
 //     // let arr1 = vec![38,83,7,7,3,8];
 
