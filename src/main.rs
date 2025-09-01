@@ -97,13 +97,15 @@ use crate::stack::stacked;
 mod binarytree;
 use crate::binarytree::{size, find_min_max, find_path};
 mod hashmap;
-use crate::hashmap::{has_zero_sum_subarray, count_zero_sum_subarrays,longest_zero_sum_subarray, longest_consecutive};
+use crate::hashmap::{has_zero_subarray, count_zero_sum_subarrays,longest_zero_sum_subarray, longest_consecutive};
 mod graph;
 use crate::graph::{num_of_island,oranges_rotting};
-
+mod pipeline;
+use crate::pipeline::pipe_line;
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
+    pipe_line();
     // let url = "https://api.github.com/users/rust-lang";
     // let response = reqwest::get(url).await?.json::<serde_json::Value>().await?;
     // println!("GitHub user: {:?}", response["login"]);
@@ -189,7 +191,8 @@ async fn main() -> Result<(), reqwest::Error>{
 
 //     //  println!("{}",recursion_power_logn(5,2));
 
-//     // let mut  arr= [5,50,10,32,34];
+     let   arr= [5,50,-55,32,34];
+     println!("has zero sum of 3 : {}",has_zero_subarray(&arr));
 
 //     // let arr1 = vec![38,83,7,7,3,8];
 

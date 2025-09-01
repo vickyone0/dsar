@@ -1,25 +1,25 @@
 use std::collections::HashMap;
 
-pub fn has_zero_sum_subarray(arr: &[i32]) -> bool {
+// pub fn has_zero_sum_subarray(arr: &[i32]) -> bool {
 
 
-    let mut prefix_sum = 0;
+//     let mut prefix_sum = 0;
 
-    let mut seen = HashMap::new();
+//     let mut seen = HashMap::new();
 
-    seen.insert(0, false);
+//     seen.insert(0, false);
 
-    for &num in arr {
-        prefix_sum += num;
+//     for &num in arr {
+//         prefix_sum += num;
 
-        if seen.contains_key(&prefix_sum) {
-            return  true;
-        }
-        seen.insert(prefix_sum, false);
-    }
-    false
+//         if seen.contains_key(&prefix_sum) {
+//             return  true;
+//         }
+//         seen.insert(prefix_sum, false);
+//     }
+//     false
 
-}
+// }
 
 pub fn count_zero_sum_subarrays(arr: &[i32]) -> i32 {
     let mut prefix_sum = 0;
@@ -115,4 +115,31 @@ pub fn longest_consecutive(nums: &[i32]) -> usize {
     }
 
     longest
+}
+
+pub fn has_zero_subarray(arr: &[i32]) -> bool {
+    let mut prefered_sum = 0;
+
+    let sum: HashMap<i32, usize> = HashMap::new();
+
+
+    for (i, &num) in arr.iter().enumerate(){
+        if i == arr.len()-3 {
+            return false;
+        }
+        //[5,50,-55,32,34
+
+        prefered_sum += num;
+
+        if prefered_sum ==0 && i >= 2 {
+            return true;
+        }
+
+        if i > 2 && sum.contains_key(&prefered_sum) {
+            return true;
+
+        }
+    }
+
+    false
 }
