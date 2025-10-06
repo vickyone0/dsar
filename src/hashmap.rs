@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+
 
 // pub fn has_zero_sum_subarray(arr: &[i32]) -> bool {
 
@@ -169,4 +169,48 @@ pub fn count_zero_sum_subarrays(arr:&[i32]) -> i32{
     count
 
 
+}
+
+
+use std::collections::HashMap;
+
+pub fn hash_insert() {
+    let mut map: HashMap<String, i32> = HashMap::new();
+
+    map.insert("apple".to_string(), 5);
+    map.insert("banana".to_string(), 3);
+    map.insert("apple".to_string(), 9);
+
+    println!("{:?}", map);
+
+
+    if let Some(v) = map.get("apple") {
+        println!("apple count = {}", v);
+    } else {
+        println!(" No apple");
+    }
+
+    if let Some(v) = map.get_mut("banana") {
+        *v +=2;
+    }
+    map.remove("apple");
+    
+    println!("{:?}", map);
+
+    println!("{}", map.contains_key("apple"));
+
+    map.entry("mango".to_string()).or_insert(7);
+    
+    for (k,v) in &map {
+        println!("{} => {}", k, v);
+    }
+    
+
+    
+    println!("Length: {}", map.len());
+println!("Empty? {}", map.is_empty());
+map.clear();
+
+let fruits = vec![("apple",3), ("banana",5)];
+let maps: HashMap<_, _> = fruits.into_iter().collect();
 }

@@ -1,4 +1,4 @@
-use std::cmp::max;
+use std::cmp::{max, min};
 
 // pub fn max_volume(arr: &[i32])-> i32{
 
@@ -21,17 +21,38 @@ use std::cmp::max;
     
 // }
 
-pub fn max_volume(arr:&[i32]) -> i32 {
+// pub fn max_volume(arr:&[i32]) -> i32 {
 
-    let mut sum = 0;
+//     let mut sum = 0;
+
+//     for i in 0..arr.len(){
+//         for j in i+1..arr.len() {
+//             let height = max(arr[i], arr[j]);
+//             let length = (j-i) as i32;
+//             sum = max(sum, height*length);
+//         }
+//     }
+//     sum
+
+// }
+
+
+pub fn max_volume(arr: &[i32]) -> i32 {
+
+    let mut vol = 0;
 
     for i in 0..arr.len(){
-        for j in i+1..arr.len() {
-            let height = max(arr[i], arr[j]);
-            let length = (j-i) as i32;
-            sum = max(sum, height*length);
+        for j in i+1..arr.len(){
+
+         let l = min(arr[i], arr[j]);
+         let b = (j - i )as i32;
+
+         vol = max(vol, l*b);
+
+
         }
+        
     }
-    sum
+    vol
 
 }

@@ -73,11 +73,11 @@ use crate::bubblesort::bubble_sort;
 mod selectionsort;
 use crate::selectionsort::selection_sort;
 mod twosumsorted;
-use crate::twosumsorted::two_sum_sorted;
+use crate::twosumsorted::{two_sum, two_sum_sorted};
 mod maxvoliume;
 use crate::maxvoliume::max_volume;
 mod sildingwindow;
-use crate::sildingwindow::max_sum_subarray;
+use crate::sildingwindow:: sliding_window_subarray_4;
 mod recursion;
 use crate::recursion::{recursion,recursion_power_logn};
 mod backtracking;
@@ -91,13 +91,13 @@ use crate::quicksort::quick_sort;
 mod insertionsort;
 use crate::insertionsort::insertion_sort;
 mod linkedlist;
-use crate::linkedlist::{Node,reverse_linked_list,find_middle};
+//use crate::linkedlist::{Node,reverse_linked_list,find_middle};
 mod stack;
 use crate::stack::stacked;
 mod binarytree;
 use crate::binarytree::{size, find_min_max, find_path};
 mod hashmap;
-use crate::hashmap::{has_zero_subarray, count_zero_sum_subarrays,longest_zero_sum_subarray, longest_consecutive};
+use crate::hashmap::{has_zero_subarray, count_zero_sum_subarrays,longest_zero_sum_subarray, longest_consecutive, hash_insert};
 mod graph;
 use crate::graph::{num_of_island,oranges_rotting};
 mod pipeline;
@@ -105,27 +105,36 @@ use crate::pipeline::pipe_line;
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
-    pipe_line();
-    // let url = "https://api.github.com/users/rust-lang";
-    // let response = reqwest::get(url).await?.json::<serde_json::Value>().await?;
-    // println!("GitHub user: {:?}", response["login"]);
-    let grid = vec![
-        vec![2, 1, 1],
-        vec![1, 1, 0],
-        vec![0, 1, 1],
-    ];
-    println!("Minutes to rot all: {}", oranges_rotting(grid)); 
+    //panic!("fji idi");
+    // pipe_line();
+    // // let url = "https://api.github.com/users/rust-lang";
+    // // let response = reqwest::get(url).await?.json::<serde_json::Value>().await?;
+    // // println!("GitHub user: {:?}", response["login"]);
+    // let grid = vec![
+    //     vec![2, 1, 1],
+    //     vec![1, 1, 0],
+    //     vec![0, 1, 1],
+    // ];
+    // println!("Minutes to rot all: {}", oranges_rotting(grid)); 
 
 
-    let grid = vec![
-        vec!['1','1','0','0','0'],
-        vec!['1','1','0','0','0'],
-        vec!['0','0','1','0','0'],
-        vec!['0','0','0','1','1'],
-    ];
-    println!("Number of islands: {}", num_of_island(grid));
+    // let grid = vec![
+    //     vec!['1','1','0','0','0'],
+    //     vec!['1','1','0','0','0'],
+    //     vec!['0','0','1','0','0'],
+    //     vec!['0','0','0','1','1'],
+    // ];
+    // println!("Number of islands: {}", num_of_island(grid));
 
-//     let arr = [4, 2, -3, 1, 6];
+     let mut arr = [4, 5, 6, 7, 8];
+     hash_insert();
+
+     println!("max value of 4 subarray is : {}", sliding_window_subarray_4(&arr));
+
+     println!("max volume : {}", max_volume(&arr));
+     println!("target index is {:?}", two_sum_sorted(&arr, 7));
+     quick_sort(&mut arr);
+     println!("quick sort: {:?}",arr);
 //     println!("Has zero-sum subarray? {}", has_zero_sum_subarray(&arr));
 //     println!("Count of zero-sum subarrays: {}", count_zero_sum_subarrays(&arr));
 //     let arr2 = [1, 2, 3];
@@ -241,3 +250,5 @@ async fn main() -> Result<(), reqwest::Error>{
 
     
 }
+
+

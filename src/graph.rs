@@ -1,3 +1,5 @@
+use std::fmt::format;
+
 pub fn num_of_island(mut grid: Vec<Vec<char>>) -> i32 {
     let rows = grid.len();
     let cols = grid[0].len();
@@ -90,5 +92,36 @@ pub fn oranges_rotting(mut grid:Vec<Vec<i32>>) -> i32{
 
     if fresh_count ==0 {minutes} else {
         -1
+    }
+}
+
+
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+pub trait Summary {
+    fn summarize(&self) -> String;
+}
+
+impl Summary for NewsArticle {
+
+    fn summarize(&self) -> String {
+        format!("{}",self.author)
+    }
+
+}
+
+pub struct SocialPost {
+    pub username: String,
+    pub content: String,
+}
+
+impl Summary for SocialPost {
+    fn summarize(&self) -> String {
+        format!("{}",self.content)
     }
 }
