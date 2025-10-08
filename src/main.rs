@@ -66,6 +66,8 @@
     
 
 
+use std::result;
+
 use reqwest;
 use tokio;
 mod bubblesort;
@@ -97,7 +99,7 @@ use crate::stack::stacked;
 mod binarytree;
 use crate::binarytree::{size, find_min_max, find_path};
 mod hashmap;
-use crate::hashmap::{has_zero_subarray, count_zero_sum_subarrays,longest_zero_sum_subarray, longest_consecutive, hash_insert};
+use crate::hashmap::{has_zero_subarray, count_zero_sum_subarrays,longest_zero_sum_subarray, longest_consecutive, hash_insert, two_sums};
 mod graph;
 use crate::graph::{num_of_island,oranges_rotting};
 mod pipeline;
@@ -105,6 +107,11 @@ use crate::pipeline::pipe_line;
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
+
+    let nums = vec![2,7,11,5,7];
+    let target = 9;
+    let result = two_sums(nums, target);
+    println!("{:?}", result);
     //panic!("fji idi");
     // pipe_line();
     // // let url = "https://api.github.com/users/rust-lang";
