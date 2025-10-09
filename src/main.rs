@@ -99,7 +99,7 @@ use crate::stack::stacked;
 mod binarytree;
 use crate::binarytree::{size, find_min_max, find_path};
 mod hashmap;
-use crate::hashmap::{has_zero_subarray, count_zero_sum_subarrays,longest_zero_sum_subarray, longest_consecutive, hash_insert, two_sums};
+use crate::hashmap::{has_zero_subarray, count_zero_sum_subarrays,longest_zero_sum_subarray, longest_consecutive, hash_insert, two_sums,length_of_longest_substring};
 mod graph;
 use crate::graph::{num_of_island,oranges_rotting};
 mod pipeline;
@@ -112,6 +112,9 @@ async fn main() -> Result<(), reqwest::Error>{
     let target = 9;
     let result = two_sums(nums, target);
     println!("{:?}", result);
+
+    let s = "abcabcbb".to_string();
+    println!("{}", length_of_longest_substring(s));
     //panic!("fji idi");
     // pipe_line();
     // // let url = "https://api.github.com/users/rust-lang";

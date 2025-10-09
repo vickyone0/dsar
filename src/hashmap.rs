@@ -215,17 +215,36 @@ let fruits = vec![("apple",3), ("banana",5)];
 let maps: HashMap<_, _> = fruits.into_iter().collect();
 }
 
+
 pub fn two_sums(nums: Vec<i32>, target: i32) -> Vec<i32> {
     let mut map = HashMap::new();
 
-    for (i, &num) in nums.iter().enumerate() {
+    for (i, &num) in nums.iter().enumerate(){
         let complement = target - num;
-
-        if let Some(&j) = map.get(&complement) {
-            return vec![j as i32, i as i32];
-
-        }
-        map.insert(num, i);
+         if let Some(&j) = map.get(&complement) {
+            return vec![i as i32, j as i32];
+         }
+         map.insert(complement, i);
     }
-    vec![]
+    return vec![];
+}
+
+pub fn length_of_longest_substring(s:String) -> i32 {
+
+    let mut map = HashMap::new();
+
+    let mut start = 0;
+    let mut max_len = 0;
+
+    for (i,c) in s.chars().enumerate() {
+        if let Some(&last_index) = map.get(&c) {
+            if last_index >= start {
+                start = last_index+1;
+            }
+        }
+        map.insert(c, i);
+        max_len = max_len.max(i - start + 1);
+    }
+
+    max_len as i32
 }
