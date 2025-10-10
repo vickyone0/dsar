@@ -172,7 +172,7 @@ pub fn count_zero_sum_subarrays(arr:&[i32]) -> i32{
 }
 
 
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 pub fn hash_insert() {
     let mut map: HashMap<String, i32> = HashMap::new();
@@ -247,4 +247,25 @@ pub fn length_of_longest_substring(s:String) -> i32 {
     }
 
     max_len as i32
+}
+
+pub fn longest_consecutives(nums: Vec<i32>) -> i32 {
+    let num_set: HashSet<i32> = nums.iter().cloned().collect();
+
+    let mut longest = 0;
+
+    for &num in &num_set {
+        if !num_set.contains(&(num - 1)) {
+            let mut current_num = num;
+            let mut count =1;
+
+            while num_set.contains(&(current_num +1)) {
+                current_num +=1;
+                count +=1;
+            }
+
+            longest = longest.max(count);
+        }
+    }
+    longest
 }
