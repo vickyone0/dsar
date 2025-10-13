@@ -73,7 +73,7 @@ use tokio;
 mod bubblesort;
 use crate::bubblesort::bubble_sort;
 mod selectionsort;
-use crate::selectionsort::selection_sort;
+//use crate::selectionsort::selection_sort;
 mod twosumsorted;
 use crate::twosumsorted::{two_sum, two_sum_sorted};
 mod maxvoliume;
@@ -99,7 +99,7 @@ use crate::stack::stacked;
 mod binarytree;
 use crate::binarytree::{size, find_min_max, find_path};
 mod hashmap;
-use crate::hashmap::{has_zero_subarray, count_zero_sum_subarrays,longest_zero_sum_subarray, longest_consecutives, hash_insert, two_sums,length_of_longest_substring};
+use crate::hashmap::{has_zero_subarray, count_zero_sum_subarrays,longest_zero_sum_subarray, longest_consecutive, hash_insert, two_sums,length_of_longest_substring,subarray_sum};
 mod graph;
 use crate::graph::{num_of_island,oranges_rotting};
 mod pipeline;
@@ -107,10 +107,16 @@ use crate::pipeline::pipe_line;
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
+    let nums = vec![1, 1, 1];
+    let k = 2;
+    println!("{}", subarray_sum(nums, k));
+    
+    let nums = vec![100, 4, 200, 1, 3, 2,5];
+    println!("{}", longest_consecutive(nums));
 
-    let nums = vec![2,3,11,5,7];
-    println!("{}", longest_consecutives(nums));
-    let target = 9;
+    // let nums = vec![2,3,11,5,7];
+    // println!("{}", longest_consecutives(nums));
+    //let target = 9;
     //let result = two_sums(nums, target);
    // println!("{:?}", result);
 

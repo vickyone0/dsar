@@ -66,56 +66,56 @@ pub fn longest_zero_sum_subarray(arr: &[i32]) -> usize {
     max_len
 }
 
-pub fn longest_consecutive(nums: &[i32]) -> usize {
-    let mut map: HashMap<i32, bool> = HashMap::new();
+// pub fn longest_consecutive(nums: &[i32]) -> usize {
+//     let mut map: HashMap<i32, bool> = HashMap::new();
 
-    // Fill map with numbers, marked as not visited
-    for &num in nums {
-        map.insert(num, false);
-    }
+//     // Fill map with numbers, marked as not visited
+//     for &num in nums {
+//         map.insert(num, false);
+//     }
 
-    let mut longest = 0;
+//     let mut longest = 0;
 
-    for &num in nums {
-        // Only start from numbers that have not been visited
-        if let Some(visited) = map.get_mut(&num) {
-            if *visited {
-                continue; // Skip if already part of a counted sequence
-            }
+//     for &num in nums {
+//         // Only start from numbers that have not been visited
+//         if let Some(visited) = map.get_mut(&num) {
+//             if *visited {
+//                 continue; // Skip if already part of a counted sequence
+//             }
 
-            *visited = true;
+//             *visited = true;
 
-            // Expand in both directions
-            let mut length = 1;
-            let mut left = num - 1;
-            let mut right = num + 1;
+//             // Expand in both directions
+//             let mut length = 1;
+//             let mut left = num - 1;
+//             let mut right = num + 1;
 
-            // Expand left
-            while let Some(v) = map.get_mut(&left) {
-                if *v {
-                    break;
-                }
-                *v = true;
-                length += 1;
-                left -= 1;
-            }
+//             // Expand left
+//             while let Some(v) = map.get_mut(&left) {
+//                 if *v {
+//                     break;
+//                 }
+//                 *v = true;
+//                 length += 1;
+//                 left -= 1;
+//             }
 
-            // Expand right
-            while let Some(v) = map.get_mut(&right) {
-                if *v {
-                    break;
-                }
-                *v = true;
-                length += 1;
-                right += 1;
-            }
+//             // Expand right
+//             while let Some(v) = map.get_mut(&right) {
+//                 if *v {
+//                     break;
+//                 }
+//                 *v = true;
+//                 length += 1;
+//                 right += 1;
+//             }
 
-            longest = longest.max(length);
-        }
-    }
+//             longest = longest.max(length);
+//         }
+//     }
 
-    longest
-}
+//     longest
+// }
 
 pub fn has_zero_subarray(arr: &[i32]) -> bool {
     let mut prefered_sum = 0;
@@ -215,6 +215,7 @@ let fruits = vec![("apple",3), ("banana",5)];
 let maps: HashMap<_, _> = fruits.into_iter().collect();
 }
 
+//lookup problem in hashmap/ hashset (3)--------------------------------
 
 pub fn two_sums(nums: Vec<i32>, target: i32) -> Vec<i32> {
     let mut map = HashMap::new();
@@ -249,23 +250,81 @@ pub fn length_of_longest_substring(s:String) -> i32 {
     max_len as i32
 }
 
-pub fn longest_consecutives(nums: Vec<i32>) -> i32 {
-    let num_set: HashSet<i32> = nums.iter().cloned().collect();
 
-    let mut longest = 0;
 
-    for &num in &num_set {
-        if !num_set.contains(&(num - 1)) {
+pub fn longest_consecutive(nums: Vec<i32>) -> i32 {
+
+    let set: HashSet<i32> = nums.iter().cloned().collect();
+
+    let mut longest =0;
+
+    for &num in &set {
+
+        //check the first value 
+        if !set.contains(&(num -1) ){
             let mut current_num = num;
-            let mut count =1;
+        let mut length = 1;
 
-            while num_set.contains(&(current_num +1)) {
-                current_num +=1;
-                count +=1;
-            }
+        //count the legth of consective number
+        while set.contains(&(current_num+1)) {
+            current_num +=1;
+            length +=1;
 
-            longest = longest.max(count);
+        }
+
+        longest = longest.max(length);
+
+
         }
     }
     longest
+}
+
+//------------------------------------------------
+
+// pub fn subarray_sum(nums: Vec<i32>, k: i32) -> i32 {
+//     let mut map = HashMap::new();
+    
+//     //Prefix sum 0 occurs once initially
+//     map.insert(0, 1);
+
+//     let mut count =0;
+//     let mut prefix_sum = 0;
+
+//     for num in nums {
+//         prefix_sum += num;
+
+//         if let Some(&freq) = map.get(&(prefix_sum - k)) {
+//             count += freq;
+//         }
+
+//         *map.entry(prefix_sum).or_insert(0) += 1;
+//     }
+
+//     count
+
+
+// }
+
+pub fn subarray_sum(nums: Vec<i32>, k: i32) -> i32 {
+
+    let mut map = HashMap::new();
+
+
+    map.insert(0, 1);
+
+    let mut count = 0;
+    let mut prefix_sum = 0;
+
+    for num in nums {
+        prefix_sum += num;
+
+        if let Some(&times) = map.get(&(prefix_sum -k)) {
+            count += times;
+        }
+
+        *map.entry(prefix_sum).or_insert(0) += 1;
+    }
+
+    count
 }
