@@ -282,29 +282,8 @@ pub fn longest_consecutive(nums: Vec<i32>) -> i32 {
 
 //------------------------------------------------
 
-// pub fn subarray_sum(nums: Vec<i32>, k: i32) -> i32 {
-//     let mut map = HashMap::new();
-    
-//     //Prefix sum 0 occurs once initially
-//     map.insert(0, 1);
-
-//     let mut count =0;
-//     let mut prefix_sum = 0;
-
-//     for num in nums {
-//         prefix_sum += num;
-
-//         if let Some(&freq) = map.get(&(prefix_sum - k)) {
-//             count += freq;
-//         }
-
-//         *map.entry(prefix_sum).or_insert(0) += 1;
-//     }
-
-//     count
 
 
-// }
 
 pub fn subarray_sum(nums: Vec<i32>, k: i32) -> i32 {
 
@@ -327,4 +306,23 @@ pub fn subarray_sum(nums: Vec<i32>, k: i32) -> i32 {
     }
 
     count
+}
+
+pub fn first_unique_char(s: String) -> i32 {
+
+    let mut freq = HashMap::new();
+
+    //step 1: Count frequency of each charater
+    for ch in s.chars() {
+
+        *freq.entry(ch).or_insert(0) +=1;
+    }
+
+    //step 2: Find first chsr with frequency 1
+    for (i, ch) in s.chars().enumerate() {
+        if freq[&ch] == 1 {
+            return i as i32;
+        }
+    }
+    -1
 }
