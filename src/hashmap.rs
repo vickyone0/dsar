@@ -326,3 +326,35 @@ pub fn first_unique_char(s: String) -> i32 {
     }
     -1
 }
+
+use std::collections::{BinaryHeap};
+
+pub fn top_k_frequent(nums: Vec<i32>, k: i32) -> Vec<i32> {
+
+    let mut freq = HashMap::new();
+    
+    //step 1: Count frequency of each number
+    for n in nums {
+        *freq.entry(n).or_insert(0) +=1;
+    }
+
+    //step 2: Create a max heap based frequcy
+    let mut heap = BinaryHeap::new();
+    for (&num, &count) in freq.iter() {
+        //heap order by count
+        heap.push((count,num));
+    }
+
+    //step3: pop top k frequent numbers
+    let mut result = Vec::new();
+    for _ in 0..k {
+        if let Some((_,num)) = heap.pop() {
+            result.push(num);
+        }
+    }
+
+    result
+
+
+
+}
