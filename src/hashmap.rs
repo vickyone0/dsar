@@ -423,3 +423,89 @@ pub fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
 
     map.into_values().collect()
 }
+
+
+pub fn word_pattern(pattern: String, s: String) -> bool {
+    let words: Vec<&str> = s.split_whitespace().collect();
+    if words.len() != pattern.len() {
+        return false;
+    }
+
+    let mut char_to_word = HashMap::new();
+    let mut word_to_char = HashMap::new();
+
+    for (ch, word) in pattern.chars().zip(words.iter()) {
+        //check pattern -> word mapping
+        if let Some(mapped_word) = char_to_word.get(&ch) {
+            if mapped_word != word {
+                return false;
+            }
+        } else {
+            char_to_word.insert(ch, *word);
+        }
+
+        //check word -> pattern mapping
+        if let Some(mapped_char) = word_to_char.get(word) {
+            if *mapped_char != ch {
+                return false;
+            }
+        } else {
+            word_to_char.insert(*word, ch);
+        }
+    }
+
+    true
+}
+
+
+use std::cell::RefCell;
+use std::rc::Rc;
+
+// Definition for a Node.
+#[derive(Debug)]
+struct Node {
+    val: i32,
+    next: Option<Rc<RefCell<Node>>>,
+    random: Option<Rc<RefCell<Node>>>,
+}
+
+impl Node {
+    fn new(val: i32) -> Rc<RefCell<Self>> {
+        Rc::new(RefCell::new(Node { val, next: None, random: None }))
+    }
+}
+
+pub fn copy_random_list(head: Option<Rc<RefCell<Node>>>) -> Option<Rc<RefCell<Node>>> {
+    let mut map = HashMap::new();
+    let mut current = head.clone();
+
+    // Step 1: clone all nodes and store mapping old -> new
+    while let Some(node) = current {
+        let new_node = Node::new(node.borrow().val);
+        map.insert(Rc::as_ptr(&node), new_node);
+        current = node.borrow().next.clone();
+    }
+
+    // Step 2: connect next and random using map
+    current = head.clone();
+    while let Some(node) = current {
+        let new_node = map.get(&Rc::as_ptr(&node)).unwrap();
+
+        // Set new_node.next
+        if let Some(next_node) = &node.borrow().next {
+            let new_next = map.get(&Rc::as_ptr(next_node)).unwrap();
+            new_node.borrow_mut().next = Some(new_next.clone());
+        }
+
+        // Set new_node.random
+        if let Some(random_node) = &node.borrow().random {
+            let new_random = map.get(&Rc::as_ptr(random_node)).unwrap();
+            new_node.borrow_mut().random = Some(new_random.clone());
+        }
+
+        current = node.borrow().next.clone();
+    }
+
+    // Return head of cloned list
+    head.map(|h| map.get(&Rc::as_ptr(&h)).unwrap().clone())
+}
