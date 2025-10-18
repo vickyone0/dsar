@@ -328,6 +328,8 @@ pub fn first_unique_char(s: String) -> i32 {
 }
 
 use std::collections::{BinaryHeap};
+use std::result;
+use std::slice::Windows;
 
 pub fn top_k_frequent(nums: Vec<i32>, k: i32) -> Vec<i32> {
 
@@ -357,4 +359,89 @@ pub fn top_k_frequent(nums: Vec<i32>, k: i32) -> Vec<i32> {
 
 
 
+}
+
+// pub fn find_anagrams(s: String, p: String) -> Vec<i32> {
+
+//     let s_chars: Vec<char> = s.chars().collect();
+//     let p_chars: Vec<char> = p.chars().collect();
+
+//     if s.len() < p.len() {
+//         return vec![];
+//     }
+
+//     let mut p_count = HashMap::new();
+//     let mut window_count = HashMap::new();
+//     let mut result = Vec::new();
+     
+//     //step 1: Count frequency of pattern chars
+//     for &ch in &p_chars {
+//         *p_count.entry(ch).or_insert(0) += 1;
+
+//     }
+
+//     let window_size = p_chars.len();
+
+//     //step 2: Move sliding window
+//     for i in 0..s_chars.len() {
+
+//         *window_count.entry(s_chars[i]).or_insert(0) +=1;
+
+//         if i >= window_size {
+//             let left_char = s_chars[i - window_size];
+//             *window_count.get_mut(&left_char).unwrap() -= 1;
+//             if window_count[&left_char] == 0 {
+//                 window_count.remove(&left_char);
+//             }
+//         }
+//         //step 3: Compare frequency maps
+//         if window_count == p_count {
+//             result.push((i + 1 - window_size) as i32);
+//         }
+//     }
+
+//     result
+// }
+
+pub fn find_anagrams(s: String, p: String) -> Vec<i32> {
+
+    let s_chars: Vec<char> = s.chars().collect();
+    let p_chars: Vec<char> = p.chars().collect();
+
+    if p.len() > s.len() {
+        return vec![];
+    }
+
+    let mut p_count = HashMap::new();
+    let mut window_count = HashMap::new();
+    let mut result = Vec::new();
+
+
+
+    //step 1: Count frequency of pattern chars
+    for &ch in &p_chars{
+        *p_count.entry(ch).or_insert(0) +=1;
+    }
+
+    let window_size = p_chars.len();
+
+    //step 2: move sliding window
+    for i in 0..s_chars.len() {
+
+        *window_count.entry(s_chars[i]).or_insert(0) +=1;
+
+
+        if i > window_size {
+            let left_char = s_chars[i - window_size];
+            *window_count.get_mut(&left_char).unwrap() -=1;
+            if window_count[&left_char] == 0{
+                window_count.remove(&left_char);
+            }
+        }
+        //step 3: Compare frequnecy maps
+        if window_count == p_count{
+            result.push((i + 1 - window_size) as i32);
+        }
+    }
+    result
 }
