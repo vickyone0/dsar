@@ -112,9 +112,13 @@ mod ispalindrome;
 use crate::ispalindrome::is_palindrome;
 mod fizzbuzz;
 use crate::fizzbuzz::fizz_buzz;
+mod maxmin;
+use crate::maxmin::max_min;
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
+    let arr = [2,3,4,9];
+    println!("{:?}",max_min(&arr));
     for i in 0..100{
         println!("{}",fizz_buzz(i));
     }
