@@ -110,9 +110,14 @@ mod countvowelsinstring;
 use crate::countvowelsinstring::count_vowels_in_string;
 mod ispalindrome;
 use crate::ispalindrome::is_palindrome;
+mod fizzbuzz;
+use crate::fizzbuzz::fizz_buzz;
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
+    for i in 0..100{
+        println!("{}",fizz_buzz(i));
+    }
     let val = "abc".to_string();
 
     println!("{} reverse is {}",val,is_palindrome(&val));
