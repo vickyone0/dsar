@@ -104,9 +104,13 @@ mod graph;
 use crate::graph::{num_of_island,oranges_rotting};
 mod pipeline;
 use crate::pipeline::pipe_line;
+mod reverse_string;
+use crate::reverse_string::reverse_string;
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
+    let val = "abc".to_string();
+    println!("{} reverse is {}",val,reverse_string(&val));
     let nums = vec![1, 1, 1];
     let k = 2;
     println!("{}", subarray_sum(nums, k));

@@ -124,3 +124,25 @@ pub fn reverse_linked_list(mut list: Linkedlist) -> Linkedlist {
 
 }
 
+#[derive(PartialEq, Eq, Clone, Debug)]
+pub struct ListNode {
+    pub val : i32,
+    pub next: Option<Box<ListNode>>,
+}
+
+impl ListNode {
+    #[inline]
+    fn new(val: i32) -> Self {
+        ListNode { next: None, val}
+    }
+}
+
+// pub fn reverse_list(mut head: Option<Box<ListNOde>>) -> Option<Box<ListNode>> {
+//     let mut prev = None;
+//     while let Some(mut current) = head {
+//         head = current.next.take();
+//         current.next = prev;
+//         prev = Some(current);
+//     }
+//     prev
+// }

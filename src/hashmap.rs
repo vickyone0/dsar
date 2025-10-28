@@ -469,95 +469,95 @@ struct Node {
     random: Option<Rc<RefCell<Node>>>,
 }
 
-impl Node {
-    fn new(val: i32) -> Rc<RefCell<Self>> {
-        Rc::new(RefCell::new(Node { val, next: None, random: None }))
-    }
-}
+// impl Node {
+//     fn new(val: i32) -> Rc<RefCell<Self>> {
+//         Rc::new(RefCell::new(Node { val, next: None, random: None }))
+//     }
+// }
 
-pub fn copy_random_list(head: Option<Rc<RefCell<Node>>>) -> Option<Rc<RefCell<Node>>> {
-    let mut map = HashMap::new();
-    let mut current = head.clone();
+// pub fn copy_random_list(head: Option<Rc<RefCell<Node>>>) -> Option<Rc<RefCell<Node>>> {
+//     let mut map = HashMap::new();
+//     let mut current = head.clone();
 
-    // Step 1: clone all nodes and store mapping old -> new
-    while let Some(node) = current {
-        let new_node = Node::new(node.borrow().val);
-        map.insert(Rc::as_ptr(&node), new_node);
-        current = node.borrow().next.clone();
-    }
+//     // Step 1: clone all nodes and store mapping old -> new
+//     while let Some(node) = current {
+//         let new_node = Node::new(node.borrow().val);
+//         map.insert(Rc::as_ptr(&node), new_node);
+//         current = node.borrow().next.clone();
+//     }
 
-    // Step 2: connect next and random using map
-    current = head.clone();
-    while let Some(node) = current {
-        let new_node = map.get(&Rc::as_ptr(&node)).unwrap();
+//     // Step 2: connect next and random using map
+//     current = head.clone();
+//     while let Some(node) = current {
+//         let new_node = map.get(&Rc::as_ptr(&node)).unwrap();
 
-        // Set new_node.next
-        if let Some(next_node) = &node.borrow().next {
-            let new_next = map.get(&Rc::as_ptr(next_node)).unwrap();
-            new_node.borrow_mut().next = Some(new_next.clone());
-        }
+//         // Set new_node.next
+//         if let Some(next_node) = &node.borrow().next {
+//             let new_next = map.get(&Rc::as_ptr(next_node)).unwrap();
+//             new_node.borrow_mut().next = Some(new_next.clone());
+//         }
 
-        // Set new_node.random
-        if let Some(random_node) = &node.borrow().random {
-            let new_random = map.get(&Rc::as_ptr(random_node)).unwrap();
-            new_node.borrow_mut().random = Some(new_random.clone());
-        }
+//         // Set new_node.random
+//         if let Some(random_node) = &node.borrow().random {
+//             let new_random = map.get(&Rc::as_ptr(random_node)).unwrap();
+//             new_node.borrow_mut().random = Some(new_random.clone());
+//         }
 
-        current = node.borrow().next.clone();
-    }
+//         current = node.borrow().next.clone();
+//     }
 
-    // Return head of cloned list
-    head.map(|h| map.get(&Rc::as_ptr(&h)).unwrap().clone())
-}
+//     // Return head of cloned list
+//     head.map(|h| map.get(&Rc::as_ptr(&h)).unwrap().clone())
+// }
 
 
-use std::cell::Refcell;
-use std::rc::Rc;
+// use std::cell::Refcell;
+// use std::rc::Rc;
 
-//Define for a Node.
-#[derive(Debug)]
-struct Node {
-    val: i32,
-    next: Option<Rc<RefCell<Node>>>,
-    random: Option<Rc<RefCell<Node>>>,
-}
+// //Define for a Node.
+// #[derive(Debug)]
+// struct Node {
+//     val: i32,
+//     next: Option<Rc<RefCell<Node>>>,
+//     random: Option<Rc<RefCell<Node>>>,
+// }
 
-impl Node {
-    fn new(val: i32) -> Rc<RefCell<Self>> {
-        Rc::new(RefCell::new(Node { val, next: None, random: None}))
-    }
-}
+// impl Node {
+//     fn new(val: i32) -> Rc<RefCell<Self>> {
+//         Rc::new(RefCell::new(Node { val, next: None, random: None}))
+//     }
+// }
 
-fn copy_randoms_list(head: Option<Rc<RefCell<Node>>>) -> Option<Rc<RefCell<Node>>> {
-    let mut map = HashMap::new();
-    let mut current = head.clone();
+// fn copy_randoms_list(head: Option<Rc<RefCell<Node>>>) -> Option<Rc<RefCell<Node>>> {
+//     let mut map = HashMap::new();
+//     let mut current = head.clone();
 
-    //Step 1: clone all nodes and store mapping old -> new
-    while let Some(node) = current {
-        let new_node = Node::new(node.borrow().val);
-        map.insert(Rc::as_ptr(&node), new_node);
-        current = node.borrow().next.clone();
-    }
+//     //Step 1: clone all nodes and store mapping old -> new
+//     while let Some(node) = current {
+//         let new_node = Node::new(node.borrow().val);
+//         map.insert(Rc::as_ptr(&node), new_node);
+//         current = node.borrow().next.clone();
+//     }
 
-    //Step2: connect next and random using map
-    current = head.clone();
-    while let Some(node) = current {
+//     //Step2: connect next and random using map
+//     current = head.clone();
+//     while let Some(node) = current {
 
-        let new_node = map.get(&Rc::as_ptr(&node)).unwrap();
+//         let new_node = map.get(&Rc::as_ptr(&node)).unwrap();
 
-        if let Some(next_node) = &node.borrow().next {
-            let new_next = map.get(&Rc::as_ptr(next_node)).unwrap();
-            new_node.borrow_mut().next = Some(new_next.clone());
-        }
+//         if let Some(next_node) = &node.borrow().next {
+//             let new_next = map.get(&Rc::as_ptr(next_node)).unwrap();
+//             new_node.borrow_mut().next = Some(new_next.clone());
+//         }
 
-        if let Some(random_node) = &node.borrow().random {
-            let new_random = map.get(&Rc::as_ptr(random_node)).unwrap();
-            new_node.borrow_mut().random = Some(new_random.clone());
-        }
+//         if let Some(random_node) = &node.borrow().random {
+//             let new_random = map.get(&Rc::as_ptr(random_node)).unwrap();
+//             new_node.borrow_mut().random = Some(new_random.clone());
+//         }
 
-        current = node.borrow().next.clone();
+//         current = node.borrow().next.clone();
 
-    }
+//     }
 
-    head.map(|h| map.get(&Rc::as_ptr(&h)).unwrap().clone())
-}
+//     head.map(|h| map.get(&Rc::as_ptr(&h)).unwrap().clone())
+// }
