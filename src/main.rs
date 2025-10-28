@@ -106,11 +106,14 @@ mod pipeline;
 use crate::pipeline::pipe_line;
 mod reverse_string;
 use crate::reverse_string::reverse_string;
+mod countvowelsinstring;
+use crate::countvowelsinstring::count_vowels_in_string;
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
     let val = "abc".to_string();
-    println!("{} reverse is {}",val,reverse_string(&val));
+
+    println!("{} reverse is {}",val,count_vowels_in_string(&val));
     let nums = vec![1, 1, 1];
     let k = 2;
     println!("{}", subarray_sum(nums, k));
