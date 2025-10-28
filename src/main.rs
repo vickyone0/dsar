@@ -114,14 +114,18 @@ mod fizzbuzz;
 use crate::fizzbuzz::fizz_buzz;
 mod maxmin;
 use crate::maxmin::max_min;
+mod unique;
+use crate::unique::unique;
+mod frequcycheck;
+use crate::frequcycheck::frequency_count;
+mod findmissingnum;
+use crate::findmissingnum::find_missing;
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
-    let arr = [2,3,4,9];
-    println!("{:?}",max_min(&arr));
-    for i in 0..100{
-        println!("{}",fizz_buzz(i));
-    }
+    let arr = [2,3,4,5];
+    println!("{}",find_missing(&arr));
+   
     let val = "abc".to_string();
 
     println!("{} reverse is {}",val,is_palindrome(&val));
