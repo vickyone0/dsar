@@ -95,7 +95,7 @@ use crate::insertionsort::insertion_sort;
 mod linkedlist;
 //use crate::linkedlist::{Node,reverse_linked_list,find_middle};
 mod stack;
-use crate::stack::stacked;
+//use crate::stack::stacked;
 mod binarytree;
 use crate::binarytree::{size, find_min_max, find_path};
 mod hashmap;
@@ -120,9 +120,21 @@ mod frequcycheck;
 use crate::frequcycheck::frequency_count;
 mod findmissingnum;
 use crate::findmissingnum::find_missing;
+mod sumofdigit;
+use crate::sumofdigit::sum_of_digit;
+mod checkanagram;
+use crate::checkanagram::check_anagram;
+mod queue;
 
 #[tokio::main]
 async fn main() -> Result<(), reqwest::Error>{
+    
+    let s1 = "abcd";
+    let s2 = "dcba";
+
+    println!("{}", check_anagram(s1, s2));
+    let  num = 2345;
+    println!("{}",sum_of_digit(num));
     let arr = [2,3,4,5];
     println!("{}",find_missing(&arr));
    
