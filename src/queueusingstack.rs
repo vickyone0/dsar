@@ -39,3 +39,4 @@ impl MyQueue {
 
     fn empty(&self) -> bool {
         self.in_stack.is_empty() && self.out_stack.is_empty()
+    }
