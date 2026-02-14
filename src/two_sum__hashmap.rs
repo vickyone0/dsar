@@ -1,15 +1,17 @@
-pub fn two_sum_hashmap(arr:&[i32],tar:i32) -> (usize,usize) {
 
-    let value_to_index = HashMap::new();
+
+
+pub fn two_sum(nums:&[i32], target:i32) -> (usize,usize) {
+
+    let mut map = HashMap::new();
 
     for (i, num) in arr.iter().enumarate() {
-        let  complement = tar - num;
-        if value_to_index[complement].is_excit() {
-            let index = value_to_index[complement];
-            (i, index)
+        let complement = target - num;
+        
+        if let Some(&j) =map.get(&complement) {
+            return ( i, j);
         }
-
-        value_to_index(complement, i);
+        map.insert(num, i);
     }
-    (0, 0)
+    ()
 }

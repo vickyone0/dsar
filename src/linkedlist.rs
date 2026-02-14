@@ -1,209 +1,256 @@
 
-// #[derive(Debug, Clone)]
-// pub struct Node {
-//     pub value: i32,
-//     pub next: Option<Box<Node>>,
+type Link = Option<Box<Node>>;
+
+#[derive(Debug,Clone)]
+pub struct Node {
+   pub elem: i32,
+   pub next: Link,
+}
+
+impl Node {
+    pub fn new(value: i32) ->Self {
+        Node{
+            elem: value,
+            next: None,
+        }
+    }
+}
+
+pub fn print_value(head: &Node){
+
+    let mut current = Some(head);
+
+    while let Some(node) = current {
+
+
+        println!("{}",node.elem);
+        
+        current = match &node.next {
+
+            Some(next_node) => Some(next_node.as_ref()),
+            None => None,
+        };
+    }
+}
+
+pub fn size_of_linkedlist(head: &Node){
+
+    let mut current = Some(head);
+
+    let mut size = 0;
+
+    while let Some(node) = current {
+
+        size +=1;
+
+        current = match &node.next {
+            Some(next_node) => Some(next_node.as_ref()),
+            None => None
+        }
+        
+    }
+    println!("{}",size);
+}
+
+
+pub fn insert_at_begin (head: Node,value:i32) -> Link{
+
+    let mut new_node = Node::new(value);
+
+    new_node.next = Some(Box::new(head));
+
+    print_value(&new_node);
+
+    Some(Box::new(new_node))
+
+    
+}
+
+pub fn insert_at_end(head: &mut Node, value:i32){
+    
+     let new_node = Node::new(value);
+
+    let mut current = head;
+
+    while current.next.is_some(){
+        current =  current.next.as_mut().unwrap();
+    }
+   
+
+    current.next =Some(Box::new(new_node));
+
+}
+
+pub fn insert_at_given_node(head: &mut Node, value: i32, insert_node: &Node){
+
+   let mut current = head;
+   let insert_value = insert_node.elem;
+
+   loop {
+      if current.elem == insert_value {
+        let mut new_node = Node::new(value);
+        new_node.next = current.next.take();
+
+        current.next = Some(Box::new(new_node));
+        break;
+    }
+
+    match current.next.as_mut() {
+        Some(next) => {
+            current = next},
+        None => break,
+    }
+   }
+}
+
+pub fn revere_linkedList(head:  Node) ->Box<Node> {
+
+    let mut prev = None;
+    let mut current = Some(Box::new(head));
+
+    while let Some(mut node) = current {
+        let next = node.next;
+        node.next = prev;
+        prev = Some(node);
+        current = next;
+    }
+
+    prev.unwrap()
+}
+
+pub fn middle_of_linkedList(head: &Node) -> &Node{
+
+   let mut slow: &Node = head;
+   let mut fast: Option<&Node> = Some(head);
+
+   while let Some(f) = fast {
+    if let Some(next_fast) = f.next.as_deref() {
+        if let Some(next_next_fast) = next_fast.next.as_deref(){
+            slow = slow.next.as_deref().unwrap();
+            fast = Some(next_next_fast);
+        }
+        else {
+        break;
+    }
+   } else {
+    break;
+   }
+}
+   
+   slow
+   }
+
+   pub fn remove_nth_node_from_end(head: Node, nth_node: usize)-> Option<Box<Node>>{
+
+
+    let mut dummy = Box::new(Node {
+        elem: 0,
+        next: Some(Box::new(head)),
+    });
+
+    let mut fast: *mut Box<Node> = &mut dummy;
+    let mut slow: *mut Box<Node> = &mut dummy;
+
+    for _ in 0..nth_node {
+        unsafe {
+            fast = (*fast).next.as_mut().unwrap();
+        }
+    }
+
+    unsafe {
+        while (*fast).next.is_some() {
+            fast = (*fast).next.as_mut().unwrap();
+            slow = (*slow).next.as_mut().unwrap();
+        }
+
+        let to_remove = (*slow).next.take();
+        (*slow).next = to_remove.unwrap().next;
+    }
+
+    dummy.next.take()
+   }
+
+   pub fn is_palindrome(head: Node) -> bool{
+         let middle = middle_of_linkedList(&head);
+         let reverse_half = revere_linkedList(head.clone());
+
+         
+             
+         
+   }
+
+
+// #[derive(Debug)]
+// pub struct LinkedList {
+//    pub head: Link,
 // }
 
-// impl Node{
-
-//     pub fn new(value: i32) -> Box<Self>{
-//         Box::new(Node {
-//             value,
-//             next: None,
-//         })
-//     }
-
-//     pub fn with_next(value: i32, next: Option<Box<Node>>) -> Self {
-//         Node {
-//             value,
-//             next,
-//         }
-//     }
-
-//     pub fn value(v:i32) -> Node {
-//         Node {
-//             value: v,
-//             next: None,
-//         }
-//     }
-
-//     pub fn next(self,n: Option<Box<Node>>) -> Node {
-//         Node {
-//             value: self.value, // Placeholder value
-//             next: n,
-//         }
-//     }
-
-//     pub fn print_value(&self) {
-
-//         let mut temp = self;
-//         // while temp.value {
-//         //     println!("Value: {}", temp.value);
-//         //     // if let Some(next_node) = &self.next {
-//         //     //     self.value = next_node.value;
-//         //     // }
-//         //     temp = temp.next.as_ref().unwrap();
-//         // }
-//         println!("Value: {}", temp.value);
-//     }
-
-// }
-
-
-// pub fn reverse_linked_list(mut head: Option<Box<Node>>) -> Option<Box<Node>>
-// {
-
-//     let mut prev = None;
-//     while let Some(mut node) = head {
-//         head = node.next.take();
-//         node.next = prev;
-//         prev = Some(node);
-
-//     }
-//     prev
-// }
-
-
-// pub fn find_middle(head: &Option<Box<Node>>) -> Option<&Box<Node>> {
-
-//     let mut slow = head.as_ref();
-//     let mut fast = head.as_ref();
-
-//     while let (Some(f), Some(ff)) = (fast, fast.as_ref().unwrap().next.as_ref()) {
-//         fast = ff.next.as_ref();
-//         slow = slow.unwrap().next.as_ref();
-//     }
-
-//     slow
-// }
-
-
-// pub struct Node {
-//     data: i32,
-//     next: Option<Box<Node>>
-// }
-
-// pub struct Linkedlist {
-//     pub head: Option<Box<Node>>
-// }
-
-
-// impl Linkedlist {
-
+// impl LinkedList {
+//     // 1. Create an empty list
 //     pub fn new() -> Self {
-//         Linkedlist { head: None}
+//         LinkedList { head: None }
 //     }
 
-//     pub fn push_front(&mut self, data: i32) {
-//         let new_node = Box::new(Node{
-//             data: data,
-//             next: self.head.take(),
+//     // 2. Push: Add an element to the front of the list
+//     pub fn push(&mut self, elem: i32) {
+//         let new_node = Box::new(Node {
+//             elem: elem,
+//             // We take ownership of the old head and set it as the next of the new node
+//             next: self.head.take(), 
 //         });
 
 //         self.head = Some(new_node);
 //     }
 // }
 
+//   pub fn print_value(mut head: &Link){
+        
+//         while let Some(node) = head {
 
-// pub fn reverse_linked_list(mut list: Linkedlist) -> Linkedlist {
-//     let mut perv = None;
-//     let mut current = list.head.take();
-    
-//     while let Some(mut node) = current {
-                
-//                 let mut next = node.next.take();
+//             println!("{}", node.elem);
+//             head = &node.next;
+            
+//         }
 
-//                 node.next = perv;
-//                 perv = Some(node); 
-//                 current = next;
 //     }
-//     list.head = perv;
-//     list
 
 
-// }
+//     pub fn size_of_linkedlist(mut head: &Link){
 
-// #[derive(PartialEq, Eq, Clone, Debug)]
-// pub struct ListNode {
-//     pub val : i32,
-//     pub next: Option<Box<ListNode>>,
-// }
+//         let mut size: i32 = 0;
 
-// impl ListNode {
-//     #[inline]
-//     fn new(val: i32) -> Self {
-//         ListNode { next: None, val}
+//         while let Some(node) = head{
+
+//             size +=1;
+
+//             head = &node.next;
+
+//         }
+//         println!("{}",size);
 //     }
-// }
 
-// pub fn reverse_list(mut head: Option<Box<ListNOde>>) -> Option<Box<ListNode>> {
-//     let mut prev = None;
-//     while let Some(mut current) = head {
-//         head = current.next.take();
-//         current.next = prev;
-//         prev = Some(current);
+//     pub fn insert_at_begin(mut head: Link, value:i32){
+//         let cre_node = Box::new(Node{
+//             elem:value,
+//             next: head,
+//         });
+//         print_value(&Some(cre_node));
 //     }
-//     prev
-// }
 
-#[derive(Debug)]
-struct Node<T> {
-    value: T,
-    next: Option<Box<Node<T>>>,
-}
+//     pub fn insert_at_end(head: &mut Link, value: i32){
 
-#[derive(Debug)]
-struct Linkedlist<T> {
-    head: Option<Box<Node<T>>>,
-}
+//         let mut curr = head;
+//         while let Some(node) = curr {
 
-impl<T> Linkedlist<T> {
-    fn new() -> Self {
-        Linkedlist { head: None }
-    }
+//             curr = &mut node.next;
+            
+//         }
+//         let new_node = Box::new(Node{
+//             elem:value,
+//             next:None,
+//         });
 
-    fn push_front(&mut self, value: T) {
-        let new_node = Box::new(Node {
-            value,
-            next: self.head.take(),
-        });
-        self.head = Some(new_node);
-    }
+//         *curr = Some(new_node);
 
-    fn pop_front(&mut self) -> Option<T> {
-        self.head.take().map(|node|{
-            self.head = node.next;
-            node.value
-        })
-    }
-
-    fn peek(&self) -> Option<&T> {
-        self.head.as_ref().map(|node|&node.value)
-    }
-
-    fn is_empty(&self) -> bool {
-        self.head.is_none()
-    }
-
-    fn iter(&self) -> ListIter<'_,T> {
-        ListIter{
-            current: self.head.as_deref(),
-        }
-    }
-}
-
-struct ListIter<'a, T> {
-    current: Option<&'a Node<T>>,
-}
-
-impl<'a, T> Iterator for ListIter<'a,T> {
-    type Item = &'a T;
-
-    fn next(&mut self) ->  Option<Self::Item>{
-        self.current.map(|node|{
-            self.current = node.next.as_deref();
-            &node.value
-        })
-    }
-}
+        
+//     }
