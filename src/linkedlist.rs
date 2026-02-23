@@ -170,14 +170,14 @@ pub fn middle_of_linkedList(head: &Node) -> &Node{
     dummy.next.take()
    }
 
-   pub fn is_palindrome(head: Node) -> bool{
-         let middle = middle_of_linkedList(&head);
-         let reverse_half = revere_linkedList(head.clone());
+//    pub fn is_palindrome(head: Node) -> bool{
+//          let middle = middle_of_linkedList(&head);
+//          let reverse_half = revere_linkedList(head.clone());
 
          
              
          
-   }
+//    }
 
 
 // #[derive(Debug)]
